@@ -46,5 +46,5 @@ jobs:
       - name: Upload FirebaseAuthUI framework to artifacts
         uses: actions/upload-artifact@v2
         with: 
-          name: FirebaseAuthUI framework
+          name: FirebaseAuthUI.framework
           path: ${{env.working-directory}}/Carthage/Build/iOS/FirebaseAuthUI.framework
