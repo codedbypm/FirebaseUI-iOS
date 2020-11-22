@@ -79,6 +79,7 @@
 		FD219C4F256B1748000A837D /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C4C256B1748000A837D /* FirebaseAuth.framework */; };
 		FD219C50256B1748000A837D /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C4D256B1748000A837D /* FirebaseCore.framework */; };
 		FD219C51256B1748000A837D /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C4E256B1748000A837D /* GTMSessionFetcher.framework */; };
+		FD219C5B256B1886000A837D /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C5A256B1886000A837D /* GoogleUtilities.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,6 +251,7 @@
 		FD219C4C256B1748000A837D /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Frameworks/FirebaseAuth.framework; sourceTree = "<group>"; };
 		FD219C4D256B1748000A837D /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		FD219C4E256B1748000A837D /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = Frameworks/GTMSessionFetcher.framework; sourceTree = "<group>"; };
+		FD219C5A256B1886000A837D /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				FD219C4F256B1748000A837D /* FirebaseAuth.framework in Frameworks */,
 				FD219C50256B1748000A837D /* FirebaseCore.framework in Frameworks */,
 				FD219C51256B1748000A837D /* GTMSessionFetcher.framework in Frameworks */,
+				FD219C5B256B1886000A837D /* GoogleUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +415,7 @@
 		FD219C4B256B1748000A837D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD219C5A256B1886000A837D /* GoogleUtilities.framework */,
 				FD219C4C256B1748000A837D /* FirebaseAuth.framework */,
 				FD219C4D256B1748000A837D /* FirebaseCore.framework */,
 				FD219C4E256B1748000A837D /* GTMSessionFetcher.framework */,
