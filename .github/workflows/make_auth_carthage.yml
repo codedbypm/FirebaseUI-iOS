@@ -30,15 +30,11 @@ jobs:
         with:
           xcode-version: 12.2
 
-      # Set current directory to Auth
-      - name: Change directory into Auth
-        run: |
-          cd Auth
-          ls -la
-
       # Run Carthage bootstrap
       - name: Carthage bootstrap
-        run: carthage bootstrap
+        run: |
+          cd Auth
+          carthage bootstrap
 
       # # Run Carthage bootstrap
       # - name: Carthage Bootstrap
