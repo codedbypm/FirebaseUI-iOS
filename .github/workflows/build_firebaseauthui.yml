@@ -46,7 +46,7 @@ jobs:
         working-directory: ${{env.working-directory}}
 
       # Upload Carthage log
-      - name: Upload FirebaseAuthUI framework to artifacts
+      - name: Upload Carthage log to artifacts
         if: failure()
         uses: actions/upload-artifact@v2
         with: 
