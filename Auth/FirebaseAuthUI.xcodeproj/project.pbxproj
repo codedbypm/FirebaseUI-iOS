@@ -76,9 +76,6 @@
 		8D69E34B21DD4C6D00CFA49B /* FirebaseAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E2ED21DD4C6D00CFA49B /* FirebaseAuthUI.strings */; };
 		8D69E35921DD614000CFA49B /* FUIAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E35721DD614000CFA49B /* FUIAuthTest.m */; };
 		8D69E35A21DD614000CFA49B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E35821DD614000CFA49B /* GoogleService-Info.plist */; };
-		FD219C31256AC790000A837D /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C2F256AC790000A837D /* GTMSessionFetcher.framework */; };
-		FD219C35256ACAD0000A837D /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C34256ACAD0000A837D /* FirebaseCore.framework */; };
-		FD219C38256ACAEB000A837D /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD219C2E256AC790000A837D /* FirebaseAuth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,9 +244,6 @@
 		8D69E34121DD4C6D00CFA49B /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
 		8D69E35721DD614000CFA49B /* FUIAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAuthTest.m; sourceTree = "<group>"; };
 		8D69E35821DD614000CFA49B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FD219C2E256AC790000A837D /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = ../../../../../Library/Caches/org.carthage.CarthageKit/binaries/FirebaseAuthBinary/7.1.0/FirebaseAuth/FirebaseAuth.framework; sourceTree = "<group>"; };
-		FD219C2F256AC790000A837D /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = ../../../../../Library/Caches/org.carthage.CarthageKit/binaries/FirebaseAuthBinary/7.1.0/FirebaseAuth/GTMSessionFetcher.framework; sourceTree = "<group>"; };
-		FD219C34256ACAD0000A837D /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = ../../../../../Library/Caches/org.carthage.CarthageKit/binaries/FirebaseAnalyticsBinary/7.1.0/FirebaseAnalytics/FirebaseCore.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,9 +251,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD219C38256ACAEB000A837D /* FirebaseAuth.framework in Frameworks */,
-				FD219C35256ACAD0000A837D /* FirebaseCore.framework in Frameworks */,
-				FD219C31256AC790000A837D /* GTMSessionFetcher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +272,6 @@
 				8D69E26621DD4BD100CFA49B /* FirebaseAuthUITests */,
 				8D69E25A21DD4BD000CFA49B /* Products */,
 				ACF63AA832F9F7882BC43A9D /* Pods */,
-				FD219C2D256AC790000A837D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -407,16 +397,6 @@
 			children = (
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		FD219C2D256AC790000A837D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FD219C34256ACAD0000A837D /* FirebaseCore.framework */,
-				FD219C2E256AC790000A837D /* FirebaseAuth.framework */,
-				FD219C2F256AC790000A837D /* GTMSessionFetcher.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -920,11 +900,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Caches/org.carthage.CarthageKit/binaries/FirebaseAuthBinary/7.1.0/FirebaseAuth",
-					"$(USER_LIBRARY_DIR)/Caches/org.carthage.CarthageKit/binaries/FirebaseAnalyticsBinary/7.1.0/FirebaseAnalytics",
-				);
 				INFOPLIST_FILE = FirebaseAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -948,11 +923,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Caches/org.carthage.CarthageKit/binaries/FirebaseAuthBinary/7.1.0/FirebaseAuth",
-					"$(USER_LIBRARY_DIR)/Caches/org.carthage.CarthageKit/binaries/FirebaseAnalyticsBinary/7.1.0/FirebaseAnalytics",
-				);
 				INFOPLIST_FILE = FirebaseAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
