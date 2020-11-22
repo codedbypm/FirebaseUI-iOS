@@ -27,7 +27,9 @@ jobs:
 
       # Set current directory to Auth
       - name: Change directory into Auth
-        run: cd Auth
+        run: |
+          cd Auth
+          ls -la
 
       # Run Carthage bootstrap
       - name: Carthage Bootstrap
