@@ -25,6 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.2.1
+        with:
+          xcode-version: 12.2
+
       # Set current directory to Auth
       - name: Change directory into Auth
         run: |
@@ -32,13 +37,17 @@ jobs:
           ls -la
 
       # Run Carthage bootstrap
-      - name: Carthage Bootstrap
-        uses: devbotsxyz/carthage-bootstrap@v1.0.0
-        with:
-          github-token: ''
-          platform: 'all'
-          cache: false
-          verbose: true
+      - name: Carthage bootstrap
+        run: carthage bootstrap
+
+      # # Run Carthage bootstrap
+      # - name: Carthage Bootstrap
+      #   uses: devbotsxyz/carthage-bootstrap@v1.0.0
+      #   with:
+      #     github-token: ''
+      #     platform: 'all'
+      #     cache: false
+      #     verbose: true
 
       # Run Carthage build
       - name: Carthage build
