@@ -49,5 +49,3 @@ jobs:
         with: 
           name: carthage.log
           path: ${{env.working-directory}}/carthage.log
-  
-  
