@@ -39,7 +39,9 @@ jobs:
 
       # Run Carthage build
       - name: Carthage build
-        run: |
-          carthage build --no-skip-current --log-path ./carthage.log
-          cat ./carthage.log
+        run: carthage build --no-skip-current --log-path ./carthage.log
+        working-directory: ${{env.working-directory}}
+
+      - name: Caveman
+        run: cat ./carthage.log
         working-directory: ${{env.working-directory}}
