@@ -39,5 +39,7 @@ jobs:
 
       # Run Carthage build
       - name: Carthage build
-        run: carthage build --no-skip-current
-        working-directory: ${{env.working-directory}}      
+        run: |
+          carthage build --no-skip-current --log-path=${{env.working-directory}}/carthage.log
+          cat ${{env.working-directory}}/carthage.log
+        working-directory: ${{env.working-directory}}
