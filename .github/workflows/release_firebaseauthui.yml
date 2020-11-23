@@ -58,8 +58,8 @@ jobs:
         run: |
           export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
           export GCS_OBJECT_NAME=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}/FirebaseAuthUI-$SHA8.zip
-          
-          gsutil cp FirebaseAuthUI.zip gs://$GCS_OBJECT_NAME
+          echo $GCS_OBJECT_NAME
+#          gsutil cp FirebaseAuthUI.zip gs://$GCS_OBJECT_NAME
         working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # # Create a github Release
