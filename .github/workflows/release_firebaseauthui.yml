@@ -19,7 +19,6 @@ jobs:
     runs-on: macos-latest
     env:
       working-directory: ./Auth
-      GCS_BUCKET: ${{ secrets.GCS_BUCKET }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -55,9 +54,11 @@ jobs:
         working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # Upload 
-      - name: Deploy
+      - name: Upload to Google Cloud Storage
+        env: 
+          SHA8: ${GITHUB_SHA::8}          
         run: |-
-          gsutil cp FirebaseAuthUI.zip gs://$GCS_BUCKET
+          gsutil cp FirebaseAuthUI.zip gs://${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}/FirebaseAuthUI-$SHA8.zip
         working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # # Create a github Release
@@ -67,6 +68,7 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       #   with:
+      #     body:
       #     tag_name: v${{ github.event.inputs.version }}-carthage
       #     release_name: Release v${{ github.event.inputs.version }}-carthage
       #     draft: false
