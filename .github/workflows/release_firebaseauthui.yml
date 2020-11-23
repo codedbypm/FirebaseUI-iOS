@@ -35,10 +35,10 @@ jobs:
         run: carthage bootstrap
         working-directory: ${{env.working-directory}}
 
-      # Run Carthage build
-      - name: Carthage build
-        run: carthage build --no-skip-current --log-path ./carthage.log
-        working-directory: ${{env.working-directory}}
+      # # Run Carthage build
+      # - name: Carthage build
+      #   run: carthage build --no-skip-current --log-path ./carthage.log
+      #   working-directory: ${{env.working-directory}}
 
       # Setup gcloud/gsutil
       - name: Setup - gcloud / gsutil
@@ -48,16 +48,17 @@ jobs:
           project_id: ${{ secrets.GCS_PROJECT }}
           export_default_credentials: true
 
-      # Zip the artifact
-      - name: Zip FirebaseAuthUI.framework 
-        run: zip -r FirebaseAuthUI.zip FirebaseAuthUI.framework
-        working-directory: ${{env.working-directory}}/Carthage/Build/iOS
+      # # Zip the artifact
+      # - name: Zip FirebaseAuthUI.framework 
+      #   run: zip -r FirebaseAuthUI.zip FirebaseAuthUI.framework
+      #   working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # Upload 
       - name: Upload to Google Cloud Storage
         env: 
-          SHA8: ${GITHUB_SHA::8}          
-        run: |-
+          SHA8: ${{ github.sha[0:7] }}    
+        run: |
+          echo $SHA8
           gsutil cp FirebaseAuthUI.zip gs://${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}/FirebaseAuthUI-$SHA8.zip
         working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
