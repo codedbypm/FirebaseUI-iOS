@@ -10,6 +10,7 @@ on:
       version:
         description: 'The version of FirebaseAuthUI.framework'
         required: true
+      
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,6 +23,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Setup environment
+        run: |
+          export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
+          echo "::set-env name=GCS_BUCKET_OBJECT_PATH=::${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}"
+          echo "::set-env name=GCS_BUCKET_OBJECT_NAME::FirebaseAuthUI-$SHA8.zip"
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -40,28 +47,21 @@ jobs:
       #   run: carthage build --no-skip-current --log-path ./carthage.log
       #   working-directory: ${{env.working-directory}}
 
-      # Setup gcloud/gsutil
-      - name: Setup - gcloud / gsutil
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          service_account_key: ${{ secrets.GCS_SA_KEY }}
-          project_id: ${{ secrets.GCS_PROJECT }}
-          export_default_credentials: true
-
-      # # Zip the artifact
-      # - name: Zip FirebaseAuthUI.framework 
-      #   run: zip -r FirebaseAuthUI.zip FirebaseAuthUI.framework
-      #   working-directory: ${{env.working-directory}}/Carthage/Build/iOS
-
-      # Upload 
-      - name: Upload to Google Cloud Storage
+      # Zip the artifact
+      - name: Zip FirebaseAuthUI.framework 
+        working-directory: ${{ env.working-directory }}/Carthage/Build/iOS
         run: |
-          export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
-          export GCS_OBJECT_NAME=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}/FirebaseAuthUI-$SHA8.zip
-          echo $GCS_OBJECT_NAME
-#          gsutil cp FirebaseAuthUI.zip gs://$GCS_OBJECT_NAME
-        working-directory: ${{env.working-directory}}/Carthage/Build/iOS
+          zip -r ${{ env.GCS_BUCKET_OBJECT_NAME }} FirebaseAuthUI.framework
 
+      # Upload to Google Cloud Storage
+      - name: Upload to Google Cloud Storage
+        uses: google-github-actions/setup-gcloud/upload-cloud-storage@main
+        working-directory: ${{ env.working-directory }}/Carthage/Build/iOS
+        with:
+          credentials: ${{ secrets.GCS_SA_KEY }}
+          path: ${{ env.GCS_BUCKET_OBJECT_NAME }}
+          destination: ${{ env.GCS_BUCKET_OBJECT_PATH }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
+      
       # # Create a github Release
       # - name: Create Release
       #   id: create_release
