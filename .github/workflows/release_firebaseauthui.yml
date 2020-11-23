@@ -51,8 +51,8 @@ jobs:
 
       # Zip the artifact
       - name: Zip FirebaseAuthUI.framework 
-        run: zip FirebaseAuthUI.zip ./Carthage/Build/iOS/FirebaseAuthUI.framework
-        working-directory: ${{env.working-directory}}
+        run: zip -r FirebaseAuthUI.zip FirebaseAuthUI.framework
+        working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # Upload 
       - name: Deploy
