@@ -16,7 +16,7 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      working-directory: ./Auth
+      WORKING-DIR: ./Auth
 
     steps:
 
@@ -26,12 +26,13 @@ jobs:
       - name: Setup environment
         run: |
           export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
-          export GCS_BUCKET_OBJECT_DIR=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}
+          export GCS_BUCKET_DIR=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}
           export GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$SHA8.zip
 
+          echo "GCS_BUCKET_DIR=$GCS_BUCKET_DIR" >> $GITHUB_ENV
           echo "GCS_BUCKET_OBJECT_NAME=$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
-          echo "GCS_BUCKET_OBJECT_PATH=$GCS_BUCKET_OBJECT_DIR/$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
-          echo "DEPLOY_DIR=${{ env.working-directory }}/Carthage/Build/iOS" >> $GITHUB_ENV
+          echo "GCS_BUCKET_OBJECT_PATH=$GCS_BUCKET_DIR/$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
+          echo "DEPLOY_DIR=${{ env.WORKING-DIR }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
       # Setup Xcode version          
       - name: Setup Xcode version
@@ -42,12 +43,12 @@ jobs:
       # Run Carthage bootstrap
       - name: Carthage bootstrap
         run: carthage bootstrap
-        working-directory: ${{ env.working-directory }}
+        working-directory: ${{ env.WORKING-DIR }}
 
       # Run Carthage build
       - name: Carthage build
         run: carthage build --no-skip-current --log-path ./carthage.log
-        working-directory: ${{ env.working-directory }}
+        working-directory: ${{ env.WORKING-DIR }}
 
       # Zip the artifact
       - name: Zip FirebaseAuthUI.framework 
@@ -61,7 +62,7 @@ jobs:
         with:
           credentials: ${{ secrets.GCS_SA_KEY }}
           path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
-          destination: ${{ env.GCS_BUCKET_OBJECT_PATH }}
+          destination: ${{ env.GCS_BUCKET_DIR }}
       
       # # Create a github Release
       # - name: Create Release
