@@ -25,9 +25,9 @@ jobs:
       # Configure environment variables
       - name: Setup environment
         run: |
-          export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
+          export SHA16=$(git rev-parse --short=16 ${{ github.sha }})
           export GCS_BUCKET_DIR=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}
-          export GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$SHA8.zip
+          export GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$SHA16.zip
 
           echo "GCS_BUCKET_DIR=$GCS_BUCKET_DIR" >> $GITHUB_ENV
           echo "GCS_BUCKET_OBJECT_NAME=$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
