@@ -25,42 +25,43 @@ jobs:
     steps:
       - name: Setup environment
         run: |
-          export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
-          echo "GCS_BUCKET_OBJECT_PATH=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}" >> $GITHUB_ENV
-          echo "GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$SHA8.zip" >> $GITHUB_ENV
+          export SHA8=$(git rev-parse --short=8 ${{ github.sha }})          
+          echo "GCS_BUCKET_OBJECT_DIR=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          echo "GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$(SHA8).zip" >> $GITHUB_ENV
+          echo "GCS_BUCKET_OBJECT_PATH=$GCS_BUCKET_OBJECT_DIR/$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
           echo "DEPLOY_DIR=${{ env.working-directory }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup Xcode version
-        uses: maxim-lobanov/setup-xcode@v1.2.1
-        with:
-          xcode-version: 11.7
+      # - name: Setup Xcode version
+      #   uses: maxim-lobanov/setup-xcode@v1.2.1
+      #   with:
+      #     xcode-version: 11.7
 
-      # Run Carthage bootstrap
-      - name: Carthage bootstrap
-        run: carthage bootstrap
-        working-directory: ${{env.working-directory}}
+      # # Run Carthage bootstrap
+      # - name: Carthage bootstrap
+      #   run: carthage bootstrap
+      #   working-directory: ${{env.working-directory}}
 
-      # Run Carthage build
-      - name: Carthage build
-        run: carthage build --no-skip-current --log-path ./carthage.log
-        working-directory: ${{ env.working-directory }}
+      # # Run Carthage build
+      # - name: Carthage build
+      #   run: carthage build --no-skip-current --log-path ./carthage.log
+      #   working-directory: ${{ env.working-directory }}
 
-      # Zip the artifact
-      - name: Zip FirebaseAuthUI.framework 
-        working-directory: ${{ env.DEPLOY_DIR }}
-        run: |
-          zip -r ${{ env.GCS_BUCKET_OBJECT_NAME }} FirebaseAuthUI.framework
+      # # Zip the artifact
+      # - name: Zip FirebaseAuthUI.framework 
+      #   working-directory: ${{ env.DEPLOY_DIR }}
+      #   run: |
+      #     zip -r ${{ env.GCS_BUCKET_OBJECT_NAME }} FirebaseAuthUI.framework
 
-      # Upload to Google Cloud Storage
-      - name: Upload to Google Cloud Storage
-        uses: google-github-actions/upload-cloud-storage@main
-        with:
-          credentials: ${{ secrets.GCS_SA_KEY }}
-          path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
-          destination: ${{ env.GCS_BUCKET_OBJECT_PATH }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
+      # # Upload to Google Cloud Storage
+      # - name: Upload to Google Cloud Storage
+      #   uses: google-github-actions/upload-cloud-storage@main
+      #   with:
+      #     credentials: ${{ secrets.GCS_SA_KEY }}
+      #     path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
+      #     destination: ${{ env.GCS_BUCKET_OBJECT_PATH }}
       
       # # Create a github Release
       # - name: Create Release
