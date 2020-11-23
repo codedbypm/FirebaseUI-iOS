@@ -56,7 +56,7 @@ jobs:
       # Upload 
       - name: Upload to Google Cloud Storage
         run: |
-          gsutil cp FirebaseAuthUI.zip gs://${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}/FirebaseAuthUI-${${{ github.sha }}:7}.zip
+          gsutil cp FirebaseAuthUI.zip gs://${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}/FirebaseAuthUI-${${{ github.sha }}::7}.zip
         working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # # Create a github Release
