@@ -43,10 +43,11 @@ jobs:
         run: carthage bootstrap
         working-directory: ${{env.working-directory}}
 
-      # # Run Carthage build
-      # - name: Carthage build
-      #   run: carthage build --no-skip-current --log-path ./carthage.log
-      #   working-directory: ${{env.working-directory}}
+      # Run Carthage build
+      - name: Carthage build
+        run: carthage build --no-skip-current --log-path ./carthage.log
+        working-directory: ${{ env.working-directory 
+        }}
 
       # Zip the artifact
       - name: Zip FirebaseAuthUI.framework 
