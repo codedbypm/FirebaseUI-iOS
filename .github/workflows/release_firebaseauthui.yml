@@ -12,28 +12,23 @@ on:
         required: true
       
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: macos-latest
     env:
       working-directory: ./Auth
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2
+
       - name: Setup environment
         run: |
           export SHA8=$(git rev-parse --short=8 ${{ github.sha }})          
           echo "GCS_BUCKET_OBJECT_DIR=${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}" >> $GITHUB_ENV
-          echo "GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$(SHA8).zip" >> $GITHUB_ENV
+          echo "GCS_BUCKET_OBJECT_NAME=FirebaseAuthUI-$SHA8.zip" >> $GITHUB_ENV
           echo "GCS_BUCKET_OBJECT_PATH=$GCS_BUCKET_OBJECT_DIR/$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
           echo "DEPLOY_DIR=${{ env.working-directory }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
       # - name: Setup Xcode version
       #   uses: maxim-lobanov/setup-xcode@v1.2.1
       #   with:
