@@ -58,7 +58,7 @@ jobs:
       - name: Deploy
         run: |-
           gsutil cp FirebaseAuthUI.zip gs://$GCS_BUCKET
-        working-directory: ${{env.working-directory}}
+        working-directory: ${{env.working-directory}}/Carthage/Build/iOS
 
       # # Create a github Release
       # - name: Create Release
