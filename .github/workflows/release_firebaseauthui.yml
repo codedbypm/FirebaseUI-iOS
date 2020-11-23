@@ -28,6 +28,7 @@ jobs:
           export SHA8=$(git rev-parse --short=8 ${{ github.sha }})
           echo "::set-env name=GCS_BUCKET_OBJECT_PATH=::${{ secrets.GCS_BUCKET }}/${{ github.event.inputs.version }}"
           echo "::set-env name=GCS_BUCKET_OBJECT_NAME::FirebaseAuthUI-$SHA8.zip"
+          echo "::set-env name=DEPLOY_DIR::${{ env.working-directory }}/Carthage/Build/iOS"
           
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -49,17 +50,16 @@ jobs:
 
       # Zip the artifact
       - name: Zip FirebaseAuthUI.framework 
-        working-directory: ${{ env.working-directory }}/Carthage/Build/iOS
+        working-directory: ${{ env.DEPLOY_DIR }}
         run: |
           zip -r ${{ env.GCS_BUCKET_OBJECT_NAME }} FirebaseAuthUI.framework
 
       # Upload to Google Cloud Storage
       - name: Upload to Google Cloud Storage
-        uses: google-github-actions/setup-gcloud/upload-cloud-storage@main
-        working-directory: ${{ env.working-directory }}/Carthage/Build/iOS
+        uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.GCS_SA_KEY }}
-          path: ${{ env.GCS_BUCKET_OBJECT_NAME }}
+          path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
           destination: ${{ env.GCS_BUCKET_OBJECT_PATH }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
       
       # # Create a github Release
