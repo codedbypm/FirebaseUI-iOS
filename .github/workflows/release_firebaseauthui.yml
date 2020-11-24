@@ -59,7 +59,7 @@ jobs:
       - name: Zip ${{ env.PRODUCT_NAME }}.framework 
         working-directory: ${{ env.DEPLOY_DIR }}
         run: |
-          zip -r ${{ env.GCS_BUCKET_OBJECT_NAME }} ${{ env.PRODUCT_NAME }}.framework
+          zip -r ${{ env.GCS_ZIP_NAME }} ${{ env.PRODUCT_NAME }}.framework
 
       # Upload to Google Cloud Storage
       - name: Upload to Google Cloud Storage
@@ -67,7 +67,7 @@ jobs:
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.GCS_SA_KEY }}
-          path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
+          path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_ZIP_NAME }}
           destination: ${{ env.GCS_ZIP_UPLOAD_DIR }}
       
       # Update Carthage framework json file
