@@ -85,7 +85,7 @@ jobs:
         with:
           credentials: ${{ secrets.GCS_SA_KEY }}
           path: ${{ env.WORKING-DIR }}/${{ env.PRODUCT_NAME }}Binary.json
-          destination: ${{ secrets.GCS_BUCKET_ROOT_DIR }}
+          destination: ${{ secrets.GCS_BUCKET }}/firebase-ui
 
       # # Create a github Release
       # - name: Create Release
