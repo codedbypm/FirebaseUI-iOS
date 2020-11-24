@@ -72,20 +72,19 @@ jobs:
 
       # Upload build to Google Cloud Storage
       - name: Upload build to Google Cloud Storage
-        id: upload-to-gcs-step
         working-directory: ${{ env.DEPLOY_DIR }}
         run: |
           gsutil \
           -h "Content-Type:application/zip" \
           -h "Cache-Control:no-cache, max-age=0" \
           cp ${{ env.GCS_ZIP_NAME }} gs://${{ env.GCS_ZIP_UPLOAD_DIR }}/
-
+          
       # Update Carthage framework json file
       - name: Update ${{ env.GCS_JSON_NAME }} file
         working-directory: ${{ env.WORKING-DIR }}
         run: |
           key=${{ github.event.inputs.version }}
-          value=${{ env.GCS_BUCKET_PUBLIC_URL }}/${{ steps.upload-to-gcs-step.outputs.uploaded }}
+          value=${{ env.GCS_BUCKET_PUBLIC_URL }}/firebase-ui/${{ github.event.inputs.version }}/${{ env.GCS_ZIP_NAME }}
           curl ${{ env.GCS_JSON_PUBLIC_URL }} | \
           jq \
           --arg version "$key" \
