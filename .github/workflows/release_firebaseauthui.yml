@@ -67,19 +67,18 @@ jobs:
       
       # Update Carthage framework json file
       - name: Update ${{ env.PRODUCT_NAME }}.json file
-        run: |
-          curl https://storage.googleapis.com/carthage-builds/firebase-ui/FirebaseAuthUIBinary.json
-          tmp=$(mktemp)
+        working-directory: ${{ env.WORKING-DIR }}
+        run: |          
           key=${{ github.event.inputs.version }}
           value=${{ steps.upload-to-gcs-step.outputs.uploaded }}
-          jq '. += {"$key": "$value" }' FirebaseAuthUIBinary.json > "$tmp" && mv "$tmp" FirebaseAuthUIBinary.json
+          curl https://storage.googleapis.com/carthage-builds/firebase-ui/FirebaseAuthUIBinary.json | jq '. += {"$key": "$value" }' > ${{ env.PRODUCT_NAME }}Binary.json
            
       # Upload updated JSON to Google Cloud Storage
       - name: Upload ${{ env.PRODUCT_NAME }}Binary.json to Google Cloud Storage
         uses: google-github-actions/upload-cloud-storage@main
         with:
           credentials: ${{ secrets.GCS_SA_KEY }}
-          path: ${{ env.PRODUCT_NAME }}Binary.json
+          path: ${{ env.WORKING-DIR }}/${{ env.PRODUCT_NAME }}Binary.json
           destination: ${{ secrets.GCS_BUCKET_ROOT_DIR }}
 
       # # Create a github Release
