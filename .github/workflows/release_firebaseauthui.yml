@@ -74,7 +74,7 @@ jobs:
       - name: Upload build to Google Cloud Storage
         working-directory: ${{ env.DEPLOY-DIR }}
         run: |
-          gsutil -h "Content-Type:application/zip" -h "Cache-Control:no-cache, max-age=0" cp ${{ env.GCS_ZIP_NAME }} gs://${{ secrets.GCS_ZIP_UPLOAD_DIR }}
+          gsutil -h "Content-Type:application/zip" -h "Cache-Control:no-cache, max-age=0" cp ${{ env.GCS_ZIP_NAME }} gs://${{ env.GCS_ZIP_UPLOAD_DIR }}
 
       # Update Carthage framework json file
       - name: Update ${{ env.GCS_JSON_NAME }} file
