@@ -1,10 +1,10 @@
-name: Release Carthage FirebaseGoogleAuth.framework
+name: Release Carthage FirebaseGoogleAuthUI.framework
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'The version of FirebaseGoogleAuth.framework'
+        description: 'The version of FirebaseGoogleAuthUI.framework'
         required: true
       
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-latest
     env:
       WORKING-DIR: ./GoogleAuth
-      PRODUCT_NAME: FirebaseGoogleAuth   
+      PRODUCT_NAME: FirebaseGoogleAuthUI   
       GCS_PUBLIC_URL: https://storage.googleapis.com
 
     steps:
