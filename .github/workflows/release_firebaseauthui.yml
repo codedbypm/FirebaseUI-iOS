@@ -72,7 +72,7 @@ jobs:
 
       # Upload build to Google Cloud Storage
       - name: Upload build to Google Cloud Storage
-        working-directory: ${{ env.DEPLOY-DIR }}
+        working-directory: ${{ env.DEPLOY_DIR }}
         run: |
           gsutil -h "Content-Type:application/zip" -h "Cache-Control:no-cache, max-age=0" cp ${{ env.GCS_ZIP_NAME }} gs://${{ env.GCS_ZIP_UPLOAD_DIR }}
 
