@@ -40,11 +40,11 @@ jobs:
 
           echo "DEPLOY_DIR=${{ env.WORKING-DIR }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
-      # Setup Xcode version          
-      - name: Setup Xcode version
-        uses: maxim-lobanov/setup-xcode@v1.2.1
-        with:
-          xcode-version: 11.7
+      # # Setup Xcode version          
+      # - name: Setup Xcode version
+      #   uses: maxim-lobanov/setup-xcode@v1.2.1
+      #   with:
+      #     xcode-version: 11.7
 
       # # Run Carthage bootstrap
       # - name: Carthage bootstrap
