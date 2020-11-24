@@ -71,7 +71,7 @@ jobs:
         run: |          
           key=${{ github.event.inputs.version }}
           value=${{ steps.upload-to-gcs-step.outputs.uploaded }}
-          curl https://storage.googleapis.com/carthage-builds/firebase-ui/FirebaseAuthUIBinary.json | jq '. += {"$key": "$value" }' > ${{ env.PRODUCT_NAME }}Binary.json
+          curl https://storage.googleapis.com/carthage-builds/firebase-ui/FirebaseAuthUIBinary.json | jq --arg version "$key" --arg url "$value" '.[$version] = $url' > ${{ env.PRODUCT_NAME }}Binary.json
            
       # Upload updated JSON to Google Cloud Storage
       - name: Upload ${{ env.PRODUCT_NAME }}Binary.json to Google Cloud Storage
