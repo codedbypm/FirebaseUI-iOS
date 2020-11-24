@@ -16,7 +16,8 @@ jobs:
     runs-on: macos-latest
     env:
       WORKING-DIR: ./Auth
-      PRODUCT_NAME: FirebaseAuthUI      
+      PRODUCT_NAME: FirebaseAuthUI   
+      GCS_HOST: https://storage.cloud.google.com
 
     steps:
 
@@ -26,12 +27,14 @@ jobs:
       - name: Setup environment
         run: |
           export SHA16=$(git rev-parse --short=16 ${{ github.sha }})
-          export GCS_BUCKET_UPLOAD_DIR=${{ secrets.GCS_BUCKET_ROOT_DIR }}/${{ github.event.inputs.version }}
-          export GCS_BUCKET_OBJECT_NAME=${{ env.PRODUCT_NAME }}-$SHA16.zip
-
-          echo "GCS_BUCKET_UPLOAD_DIR=$GCS_BUCKET_UPLOAD_DIR" >> $GITHUB_ENV
-          echo "GCS_BUCKET_OBJECT_NAME=$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
-          echo "GCS_BUCKET_OBJECT_PATH=$GCS_BUCKET_UPLOAD_DIR/$GCS_BUCKET_OBJECT_NAME" >> $GITHUB_ENV
+          
+          export GCS_ZIP_NAME=${{ env.PRODUCT_NAME }}-$SHA16.zip
+          echo "GCS_ZIP_UPLOAD_DIR=${{ secrets.GCS_BUCKET }}/firebase-ui/${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          
+          export GCS_JSON_NAME=${{ env.PRODUCT_NAME }}Binary.json
+          echo "GCS_JSON_NAME=$GCS_JSON_NAME" >> $GITHUB_ENV
+          echo "GCS_JSON_PUBLIC_URL=${{ env.GCS_HOST }}/${{ secrets.GCS_BUCKET }}/firebase-ui/$GCS_JSON_NAME" >> $GITHUB_ENV
+          
           echo "DEPLOY_DIR=${{ env.WORKING-DIR }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
       # Setup Xcode version          
@@ -63,15 +66,15 @@ jobs:
         with:
           credentials: ${{ secrets.GCS_SA_KEY }}
           path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_BUCKET_OBJECT_NAME }}
-          destination: ${{ env.GCS_BUCKET_UPLOAD_DIR }}
+          destination: ${{ env.GCS_ZIP_UPLOAD_DIR }}
       
       # Update Carthage framework json file
-      - name: Update ${{ env.PRODUCT_NAME }}.json file
+      - name: Update ${{ env.GCS_JSON_NAME }} file
         working-directory: ${{ env.WORKING-DIR }}
         run: |          
           key=${{ github.event.inputs.version }}
           value=${{ steps.upload-to-gcs-step.outputs.uploaded }}
-          curl https://storage.googleapis.com/carthage-builds/firebase-ui/FirebaseAuthUIBinary.json | jq --arg version "$key" --arg url "$value" '.[$version] = $url' > ${{ env.PRODUCT_NAME }}Binary.json
+          curl ${{ env.GCS_JSON_PUBLIC_URL }} | jq --arg version "$key" --arg url "$value" '.[$version] = $url' > ${{ env.PRODUCT_NAME }}Binary.json
            
       # Upload updated JSON to Google Cloud Storage
       - name: Upload ${{ env.PRODUCT_NAME }}Binary.json to Google Cloud Storage
