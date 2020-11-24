@@ -29,6 +29,7 @@ jobs:
           export SHA16=$(git rev-parse --short=16 ${{ github.sha }})
           
           export GCS_ZIP_NAME=${{ env.PRODUCT_NAME }}-$SHA16.zip
+          echo "GCS_ZIP_NAME=$GCS_ZIP_NAME" >> $GITHUB_ENV
           echo "GCS_ZIP_UPLOAD_DIR=${{ secrets.GCS_BUCKET }}/firebase-ui/${{ github.event.inputs.version }}" >> $GITHUB_ENV
           
           export GCS_JSON_NAME=${{ env.PRODUCT_NAME }}Binary.json
