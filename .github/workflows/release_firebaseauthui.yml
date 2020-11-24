@@ -17,7 +17,7 @@ jobs:
     env:
       WORKING-DIR: ./Auth
       PRODUCT_NAME: FirebaseAuthUI   
-      GCS_HOST: https://storage.cloud.google.com
+      GCS_PUBLIC_URL: https://storage.googleapis.com
 
     steps:
 
@@ -32,11 +32,11 @@ jobs:
           echo "GCS_ZIP_NAME=$GCS_ZIP_NAME" >> $GITHUB_ENV
           echo "GCS_ZIP_UPLOAD_DIR=${{ secrets.GCS_BUCKET }}/firebase-ui/${{ github.event.inputs.version }}" >> $GITHUB_ENV
           
-          export GCS_JSON_NAME=${{ env.PRODUCT_NAME }}Binary.json
+          export GCS_JSON_NAME=${{ env.PRODUCT_NAME }}.json
           echo "GCS_JSON_NAME=$GCS_JSON_NAME" >> $GITHUB_ENV
-          echo "GCS_JSON_PUBLIC_URL=${{ env.GCS_HOST }}/${{ secrets.GCS_BUCKET }}/firebase-ui/$GCS_JSON_NAME" >> $GITHUB_ENV
+          echo "GCS_JSON_PUBLIC_URL=${{ env.GCS_PUBLIC_URL }}/${{ secrets.GCS_BUCKET }}/firebase-ui/$GCS_JSON_NAME" >> $GITHUB_ENV
           
-          echo "GCS_BUCKET_PUBLIC_URL=${{ env.GCS_HOST }}/${{ secrets.GCS_BUCKET }}" >> $GITHUB_ENV
+          echo "GCS_BUCKET_PUBLIC_URL=${{ env.GCS_PUBLIC_URL }}/${{ secrets.GCS_BUCKET }}" >> $GITHUB_ENV
 
           echo "DEPLOY_DIR=${{ env.WORKING-DIR }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
@@ -46,10 +46,10 @@ jobs:
         with:
           xcode-version: 11.7
 
-      # Run Carthage bootstrap
-      - name: Carthage bootstrap
-        run: carthage bootstrap
-        working-directory: ${{ env.WORKING-DIR }}
+      # # Run Carthage bootstrap
+      # - name: Carthage bootstrap
+      #   run: carthage bootstrap
+      #   working-directory: ${{ env.WORKING-DIR }}
 
       # # Run Carthage build
       # - name: Carthage build
@@ -78,7 +78,8 @@ jobs:
           key=${{ github.event.inputs.version }}
           value=${{ env.GCS_BUCKET_PUBLIC_URL }}/${{ steps.upload-to-gcs-step.outputs.uploaded }}
           curl ${{ env.GCS_JSON_PUBLIC_URL }} | jq --arg version "$key" --arg url "$value" '.[$version] = $url' > ${{ env.GCS_JSON_NAME }}
-           
+          cat ${{ env.GCS_JSON_NAME }}
+          
       # Upload updated JSON to Google Cloud Storage
       - name: Upload ${{ env.GCS_JSON_NAME }} to Google Cloud Storage
         uses: google-github-actions/upload-cloud-storage@main
