@@ -72,6 +72,7 @@ jobs:
 
       # Upload build to Google Cloud Storage
       - name: Upload build to Google Cloud Storage
+        id: upload-to-gcs-step
         working-directory: ${{ env.DEPLOY_DIR }}
         run: |
           gsutil \
