@@ -86,13 +86,20 @@ jobs:
         run: |
           key=${{ github.event.inputs.version }}
           value=${{ env.GCS_BUCKET_PUBLIC_URL }}/${{ steps.upload-to-gcs-step.outputs.uploaded }}
-          curl ${{ env.GCS_JSON_PUBLIC_URL }} | jq --arg version "$key" --arg url "$value" '.[$version] = $url' > ${{ env.GCS_JSON_NAME }}
+          curl ${{ env.GCS_JSON_PUBLIC_URL }} | \
+          jq \
+          --arg version "$key" \
+          --arg url "$value" \
+          '.[$version] = $url' > ${{ env.GCS_JSON_NAME }}
           
       # Upload updated JSON to Google Cloud Storage
       - name: Upload ${{ env.GCS_JSON_NAME }} to Google Cloud Storage
         working-directory: ${{ env.WORKING-DIR }}
         run: |
-          gsutil -h "Content-Type:application/json" -h "Cache-Control:no-cache, max-age=0" cp ${{ env.GCS_JSON_NAME }} gs://${{ secrets.GCS_BUCKET }}/firebase-ui
+          gsutil \
+          -h "Content-Type:application/json" \
+          -h "Cache-Control:no-cache, max-age=0" \
+          cp ${{ env.GCS_JSON_NAME }} gs://${{ secrets.GCS_BUCKET }}/firebase-ui/
 
       # # Create a github Release
       # - name: Create Release
