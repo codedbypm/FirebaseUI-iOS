@@ -71,6 +71,14 @@ jobs:
       #     path: ${{ env.DEPLOY_DIR }}/${{ env.GCS_ZIP_NAME }}
       #     destination: ${{ env.GCS_ZIP_UPLOAD_DIR }}
       
+      # Setup gcloud and gsutil CLI
+      - name: Setup gcloud and gsutil CLI
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
       # Update Carthage framework json file
       - name: Update ${{ env.GCS_JSON_NAME }} file
         working-directory: ${{ env.WORKING-DIR }}
@@ -82,11 +90,9 @@ jobs:
           
       # Upload updated JSON to Google Cloud Storage
       - name: Upload ${{ env.GCS_JSON_NAME }} to Google Cloud Storage
-        uses: google-github-actions/upload-cloud-storage@main
-        with:
-          credentials: ${{ secrets.GCS_SA_KEY }}
-          path: ${{ env.WORKING-DIR }}/${{ env.GCS_JSON_NAME }}
-          destination: ${{ secrets.GCS_BUCKET }}/firebase-ui
+        working-directory: ${{ env.WORKING-DIR }}
+        run: |
+          gsutil -h "Content-Type:application/json" -h "Cache-Control:no-cache, max-age=0" cp ${{ env.WORKING-DIR }}/${{ env.GCS_JSON_NAME }} gs://${{ secrets.GCS_BUCKET }}/firebase-ui
 
       # # Create a github Release
       # - name: Create Release
