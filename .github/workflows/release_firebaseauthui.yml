@@ -35,6 +35,8 @@ jobs:
           echo "GCS_JSON_NAME=$GCS_JSON_NAME" >> $GITHUB_ENV
           echo "GCS_JSON_PUBLIC_URL=${{ env.GCS_HOST }}/${{ secrets.GCS_BUCKET }}/firebase-ui/$GCS_JSON_NAME" >> $GITHUB_ENV
           
+          echo "GCS_BUCKET_PUBLIC_URL=${{ env.GCS_HOST }}/${{ secrets.GCS_BUCKET }}" >> $GITHUB_ENV
+
           echo "DEPLOY_DIR=${{ env.WORKING-DIR }}/Carthage/Build/iOS" >> $GITHUB_ENV
           
       # Setup Xcode version          
@@ -73,7 +75,7 @@ jobs:
         working-directory: ${{ env.WORKING-DIR }}
         run: |          
           key=${{ github.event.inputs.version }}
-          value=${{ steps.upload-to-gcs-step.outputs.uploaded }}
+          value=${{ env.GCS_BUCKET_PUBLIC_URL }}/${{ steps.upload-to-gcs-step.outputs.uploaded }}
           curl ${{ env.GCS_JSON_PUBLIC_URL }} | jq --arg version "$key" --arg url "$value" '.[$version] = $url' > ${{ env.PRODUCT_NAME }}Binary.json
            
       # Upload updated JSON to Google Cloud Storage
