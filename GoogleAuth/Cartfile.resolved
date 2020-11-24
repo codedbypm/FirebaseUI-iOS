@@ -1,0 +1,4 @@
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" "7.1.0"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAuthBinary.json" "7.1.0"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseGoogleSignInBinary.json" "7.1.0"
+binary "https://storage.googleapis.com/carthage-builds/firebase-ui/FirebaseAuthUI.json" "9.0.0"

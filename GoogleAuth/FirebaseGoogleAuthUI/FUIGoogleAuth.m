@@ -19,15 +19,15 @@
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
-#import "FUIAuthBaseViewController.h"
-#import "FUIAuthErrorUtils.h"
-#import "FirebaseAuthUI.h"
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
+#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
-#import "FUIAuth_Internal.h"
-#import "FUIAuthBaseViewController_Internal.h"
-#import "FUIAuthStrings.h"
-#import "FUIAuthUtils.h"
+#import <FirebaseAuthUI/FUIAuth_Internal.h>
+#import <FirebaseAuthUI/FUIAuthBaseViewController_Internal.h>
+#import <FirebaseAuthUI/FUIAuthStrings.h>
+#import <FirebaseAuthUI/FUIAuthUtils.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

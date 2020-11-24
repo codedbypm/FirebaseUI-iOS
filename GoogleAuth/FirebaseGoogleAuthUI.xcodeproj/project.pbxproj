@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,15 @@
 		8D69E51021DE8CF000CFA49B /* ic_google@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E50A21DE8CF000CFA49B /* ic_google@3x.png */; };
 		8D69E51121DE8CF000CFA49B /* FUIGoogleAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E50B21DE8CF000CFA49B /* FUIGoogleAuth.h */; };
 		8D69E51221DE8CF000CFA49B /* FUIGoogleAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E50C21DE8CF000CFA49B /* FUIGoogleAuth.m */; };
+		FDE103B7256D528B0024E7AF /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103B6256D528B0024E7AF /* FirebaseAuth.framework */; };
+		FDE103BB256D52F20024E7AF /* FirebaseAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103BA256D52F20024E7AF /* FirebaseAuthUI.framework */; };
+		FDE103BF256D53E20024E7AF /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103BE256D53E20024E7AF /* FirebaseCore.framework */; };
+		FDE103C3256D548B0024E7AF /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103C2256D548B0024E7AF /* GoogleSignIn.framework */; };
+		FDE103C7256D55010024E7AF /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103C6256D55010024E7AF /* GTMSessionFetcher.framework */; };
+		FDE103CB256D550D0024E7AF /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103CA256D550D0024E7AF /* GoogleUtilities.framework */; };
+		FDE103CF256D55270024E7AF /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103CE256D55270024E7AF /* PromisesObjC.framework */; };
+		FDE103D3256D55330024E7AF /* GTMAppAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103D2256D55330024E7AF /* GTMAppAuth.framework */; };
+		FDE103D7256D559C0024E7AF /* AppAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE103D6256D559C0024E7AF /* AppAuth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +133,15 @@
 		8D69E50A21DE8CF000CFA49B /* ic_google@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_google@3x.png"; sourceTree = "<group>"; };
 		8D69E50B21DE8CF000CFA49B /* FUIGoogleAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIGoogleAuth.h; sourceTree = "<group>"; };
 		8D69E50C21DE8CF000CFA49B /* FUIGoogleAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIGoogleAuth.m; sourceTree = "<group>"; };
+		FDE103B6256D528B0024E7AF /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Frameworks/FirebaseAuth.framework; sourceTree = "<group>"; };
+		FDE103BA256D52F20024E7AF /* FirebaseAuthUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuthUI.framework; path = Frameworks/FirebaseAuthUI.framework; sourceTree = "<group>"; };
+		FDE103BE256D53E20024E7AF /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
+		FDE103C2256D548B0024E7AF /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = Frameworks/GoogleSignIn.framework; sourceTree = "<group>"; };
+		FDE103C6256D55010024E7AF /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = Frameworks/GTMSessionFetcher.framework; sourceTree = "<group>"; };
+		FDE103CA256D550D0024E7AF /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
+		FDE103CE256D55270024E7AF /* PromisesObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromisesObjC.framework; path = Frameworks/PromisesObjC.framework; sourceTree = "<group>"; };
+		FDE103D2256D55330024E7AF /* GTMAppAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMAppAuth.framework; path = Frameworks/GTMAppAuth.framework; sourceTree = "<group>"; };
+		FDE103D6256D559C0024E7AF /* AppAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppAuth.framework; path = Frameworks/AppAuth.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +149,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDE103D7256D559C0024E7AF /* AppAuth.framework in Frameworks */,
+				FDE103B7256D528B0024E7AF /* FirebaseAuth.framework in Frameworks */,
+				FDE103BB256D52F20024E7AF /* FirebaseAuthUI.framework in Frameworks */,
+				FDE103BF256D53E20024E7AF /* FirebaseCore.framework in Frameworks */,
+				FDE103D3256D55330024E7AF /* GTMAppAuth.framework in Frameworks */,
+				FDE103CB256D550D0024E7AF /* GoogleUtilities.framework in Frameworks */,
+				FDE103CF256D55270024E7AF /* PromisesObjC.framework in Frameworks */,
+				FDE103C7256D55010024E7AF /* GTMSessionFetcher.framework in Frameworks */,
+				FDE103C3256D548B0024E7AF /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,20 +172,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F1A7A9CC42931C0584896C1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		8D69E48D21DE8CAF00CFA49B = {
 			isa = PBXGroup;
 			children = (
 				8D69E49921DE8CAF00CFA49B /* FirebaseGoogleAuthUI */,
 				8D69E4A421DE8CAF00CFA49B /* FirebaseGoogleAuthUITests */,
 				8D69E49821DE8CAF00CFA49B /* Products */,
-				2F1A7A9CC42931C0584896C1 /* Pods */,
+				FDE103B5256D528B0024E7AF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +229,22 @@
 				8D69E50A21DE8CF000CFA49B /* ic_google@3x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		FDE103B5256D528B0024E7AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FDE103D6256D559C0024E7AF /* AppAuth.framework */,
+				FDE103D2256D55330024E7AF /* GTMAppAuth.framework */,
+				FDE103CE256D55270024E7AF /* PromisesObjC.framework */,
+				FDE103CA256D550D0024E7AF /* GoogleUtilities.framework */,
+				FDE103C6256D55010024E7AF /* GTMSessionFetcher.framework */,
+				FDE103C2256D548B0024E7AF /* GoogleSignIn.framework */,
+				FDE103BE256D53E20024E7AF /* FirebaseCore.framework */,
+				FDE103BA256D52F20024E7AF /* FirebaseAuthUI.framework */,
+				FDE103B6256D528B0024E7AF /* FirebaseAuth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -652,6 +688,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = FirebaseGoogleAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -701,6 +741,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = FirebaseGoogleAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
