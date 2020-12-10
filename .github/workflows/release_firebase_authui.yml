@@ -58,9 +58,8 @@ jobs:
 
       # Zip the artifact
       - name: Zip ${{ env.PRODUCT_NAME }}.framework 
-        working-directory: ${{ env.DEPLOY_DIR }}
+        working-directory: ${{ env.DEPLOY_DIR }}/Static
         run: | 
-          ls -l           
           zip -r ${{ env.GCS_ZIP_NAME }} ${{ env.PRODUCT_NAME }}.framework
 
       # Setup gcloud and gsutil CLI
