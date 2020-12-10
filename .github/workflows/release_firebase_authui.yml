@@ -60,6 +60,7 @@ jobs:
       - name: Zip ${{ env.PRODUCT_NAME }}.framework 
         working-directory: ${{ env.DEPLOY_DIR }}
         run: |
+          ls -l ${{ env.DEPLOY_DIR }}
           zip -r ${{ env.GCS_ZIP_NAME }} ${{ env.PRODUCT_NAME }}.framework
 
       # Setup gcloud and gsutil CLI
